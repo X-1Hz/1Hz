@@ -1,0 +1,473 @@
+--local farm = Window:CreateTab("Auto Farm", "circle-play")
+--local tp = Window:CreateTab("Teleport", "circle-fading-arrow-up")
+--local egg = Window:CreateTab("Crystal", "egg")
+--local misc = Window:CreateTab("Misc", "settings-2")
+--local cred = Window:CreateTab("Credits", "cross")
+
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Window = Rayfield:CreateWindow({
+    Name = "Ninja Legens",
+    Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+    LoadingTitle = "Loading...",
+    LoadingSubtitle = "by 1 Hz",
+    Theme = "Dark Blue", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+ 
+    DisableRayfieldPrompts = false,
+    DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+ 
+    ConfigurationSaving = {
+       Enabled = true,
+       FolderName = nil, -- Create a custom folder for your hub/game
+       FileName = "by 1 Hz"
+    },
+ 
+    Discord = {
+       Enabled = true, -- Prompt the user to join your Discord server if their executor supports it
+       Invite = "YERMQTRRmQ", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+       RememberJoins = false -- Set this to false to make them join the discord every time they load it up
+    },
+ 
+    KeySystem = true, -- Set this to true to use our key system
+    KeySettings = {
+       Title = "Ninja Legens",
+       Subtitle = "Key System",
+       Note = "Join Discord For Get Key!", -- Use this to tell the user how to get a key
+       FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+       SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+       GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+       Key = {"ILOVE_1Hz"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+    }
+ })
+ Rayfield:Notify({
+    Title = "Ninja Legens",
+    Content = "by 1 Hz",
+    Duration = 6.5,
+    Image = "check",
+ })
+local main = Window:CreateTab("Main", "circle-check")
+local Time = main:CreateLabel("Executer Time")
+function UpdateTime()
+local GameTime = math.floor(workspace.DistributedGameTime+0.5)
+local Hour = math.floor(GameTime/(60^2))%24
+local Minute = math.floor(GameTime/(60^1))%60
+local Second = math.floor(GameTime/(60^0))%60
+Time:Set("[GameTime] : Hours : "..Hour.." Minutes : "..Minute.." Seconds : "..Second)
+end
+    
+spawn(function()
+    while task.wait() do
+     pcall(function()
+      UpdateTime()
+      end)
+     end
+end)
+local Client = main:CreateLabel("Client")
+function UpdateClient()
+local Fps = workspace:GetRealPhysicsFPS()
+    Client:Set("[Fps] : "..Fps)
+end
+    
+spawn(function()
+    while true do wait(.1)
+    UpdateClient()
+    end
+end) 
+local Client1 = main:CreateLabel("Client")
+function UpdateClient1()
+local Ping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+Client1:Set("[Ping] : "..Ping)
+end
+    
+spawn(function()
+    while true do wait(.1)
+        UpdateClient1()
+    end
+end)
+local Section = main:CreateSection("Main")
+local Button = main:CreateButton({
+    Name = "Dissable Trading",
+    Callback = function()
+        local args = {
+            [1] = "disableTrading"
+        }
+        
+        game:GetService("ReplicatedStorage").rEvents.tradingEvent:FireServer(unpack(args))
+    end,
+ })
+ local Button = main:CreateButton({
+    Name = "Enable Trading",
+    Callback = function()
+        local args = {
+            [1] = "enableTrading"
+        }
+        
+        game:GetService("ReplicatedStorage").rEvents.tradingEvent:FireServer(unpack(args))
+    end,
+ })
+ local Slider = main:CreateSlider({
+    Name = "Speed",
+    Range = {16, 1000},
+    Increment = 16,
+    Suffix = "WalkSpeed",
+    CurrentValue = 16,
+    Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(v)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+    end,
+ })
+ local Slider1 = main:CreateSlider({
+    Name = "Jump",
+    Range = {50, 1000},
+    Increment = 50,
+    Suffix = "JumpPower",
+    CurrentValue = 50,
+    Flag = "Slider2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(v)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+    end,
+ })
+ local farm = Window:CreateTab("Auto Farm", "circle-play")
+ local Toggle = farm:CreateToggle({
+    Name = "Auto Swing",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.swing = (state and true or false)
+        wait()
+        while _G.swing == true do
+            wait()
+    
+    local args = {
+        [1] = "swingKatana"
+    }
+    
+    game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(unpack(args))
+    end
+    end,
+ })
+ local Toggle = farm:CreateToggle({
+    Name = "Auto Sell",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.sell = (state and true or false)
+        wait()
+        while _G.sell == true do
+            wait()
+    game.workspace.sellAreaCircles["sellAreaCircle15"].circleInner.CFrame = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame
+    wait()
+    game.workspace.sellAreaCircles["sellAreaCircle15"].circleInner.CFrame = game.Workspace.Part.CFrame
+    end
+    end,
+ })
+local Toggle = farm:CreateToggle({
+    Name = "Auto Buy All Swords",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.sw = (state and true or false)
+        wait()
+        while _G.sw == true do
+            wait()
+    
+    local args = {
+        [1] = "buyAllSwords",
+        [2] = "Blazing Vortex Island"
+    }
+    
+    game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(unpack(args))
+    end
+    end,
+ })
+ local Toggle = farm:CreateToggle({
+    Name = "Auto Buy All Belts",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.sw = (state and true or false)
+        wait()
+        while _G.sw == true do
+            wait()
+    local args = {
+        [1] = "buyAllBelts",
+        [2] = "Blazing Vortex Island"
+    }
+    
+    game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(unpack(args))
+    
+    end
+    end,
+ })
+ local Toggle = farm:CreateToggle({
+    Name = "Auto Buy All Skills",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.sk = (state and true or false)
+        wait()
+        while _G.sk == true do
+            wait()
+    local args = {
+        [1] = "buyAllSkills",
+        [2] = "Blazing Vortex Island"
+    }
+    
+    game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(unpack(args))
+    
+    end
+    end,
+ })
+ local Toggle = farm:CreateToggle({
+    Name = "Auto Buy Ranks",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.r = (state and true or false)
+        wait()
+        while _G.r == true do
+            wait()
+    local oh1 = "buyRank"
+    local oh2 = game:GetService("ReplicatedStorage").Ranks.Ground:GetChildren()
+    for i = 1,#oh2 do
+    game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i].Name)
+    end
+    end
+    end,
+ })
+ local Toggle = farm:CreateToggle({
+    Name = "Auto Buy All Shurikens",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.sh = (state and true or false)
+        wait()
+        while _G.sh == true do
+            wait()
+    local args = {
+        [1] = "buyAllShurikens",
+        [2] = "Blazing Vortex Island"
+    }
+    
+    game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(unpack(args))
+    
+    end
+    end,
+ })
+ local Toggle = farm:CreateToggle({
+    Name = "Auto Farm Chi",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.c = (state and true or false)
+        wait()
+        while _G.c == true do
+            wait()
+    for i,v in pairs(game.Workspace.spawnedCoins.Valley:GetChildren()) do
+    if v.Name == "Blue Chi Crate" then 
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+    wait(.3)
+    end
+    end
+    end
+    end,
+ })
+ local Toggle = farm:CreateToggle({
+    Name = "Auto Farm Coin",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.co = (state and true or false)
+        wait()
+        while _G.co == true do
+            wait()
+    for i,v in pairs(game.Workspace.spawnedCoins.Valley:GetChildren()) do
+    if v.Name == "Purple Coin Crate" then 
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+    wait(.3)
+    end
+    end
+    end
+    end,
+ })
+ local Toggle = farm:CreateToggle({
+    Name = "Auto Hoops",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.hoops = (state and true or false)
+        wait()
+        while _G.hoops == true do
+            wait()
+    local plr = game.Players.LocalPlayer
+    for _,v in pairs(workspace.Hoops:GetDescendants()) do
+    if v.ClassName == "MeshPart" then
+    v.touchPart.CFrame = plr.Character.HumanoidRootPart.CFrame
+    end
+    end
+    end
+    end,
+ })
+ local ISLAND = {}
+ for i,v in pairs(game.workspace.islandUnlockParts:GetChildren()) do
+ table.insert(ISLAND, v.Name)
+ end
+ local Tab = Window:CreateTab("Teleports Island", "rewind")
+ local Dropdown = Tab:CreateDropdown({
+    Name = "Teleports Island",
+    Options = ISLAND,
+    MultipleOptions = false,
+    Flag = "Dropdown", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(a)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.islandUnlockParts[a].islandSignPart.CFrame
+    end,
+ })
+ local Button = Tab:CreateButton({
+    Name = "Unlock All Island",
+    Callback = function()
+        for i,v in next, game.workspace.islandUnlockParts:GetChildren() do 
+            if v then 
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.islandSignPart.CFrame; 
+            wait(.2)
+            end
+        end
+    end,
+ })
+ local egg = Window:CreateTab("Crystal", "egg")
+ local Crystal = {}
+for i,v in pairs(game.workspace.mapCrystalsFolder:GetChildren()) do 
+table.insert(Crystal,v.Name)
+end
+local Dropdown = egg:CreateDropdown({
+    Name = "Select Crystal",
+    Options = Crystal,
+    CurrentOption = Crystal,
+    MultipleOptions = false,
+    Flag = "Dropdown", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(value)
+        _G.cryEgg = value    
+    end,
+ })
+ local Toggle = egg:CreateToggle({
+    Name = "Open Crystal",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.cCry = (state and true or false)
+        wait()
+        while _G.cCry == true do
+            wait()
+        local oh1 = "openCrystal"
+    local oh2 = _G.cryEgg
+    game:GetService("ReplicatedStorage").rEvents.openCrystalRemote:InvokeServer(oh1, oh2)
+    end
+    end,
+ })
+ local Toggle = egg:CreateToggle({
+    Name = "Auto Evolved Pet",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.ePet = (state and true or false)
+        wait()
+        while _G.ePet == true do
+            wait()
+    for i,v in pairs(game:GetService("Players").LocalPlayer.petsFolder:GetChildren()) do
+    for i,x in pairs(v:GetChildren()) do
+    local oh1 = "evolvePet"
+    local oh2 = x.Name
+    game:GetService("ReplicatedStorage").rEvents.petEvolveEvent:FireServer(oh1, oh2)
+    end
+    end
+    end
+    end,
+ })
+ local misc = Window:CreateTab("Misc", "settings-2")
+ local Toggle = misc:CreateToggle({
+    Name = "Inf Double Jump",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.iJump = state
+        if _G.iJump then
+        game.Players.LocalPlayer.multiJumpCount.Value = "99999999999999999"
+        end
+    end,
+ })
+ local Button = misc:CreateButton({
+    Name = "Get All Elements",
+    Callback = function()
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Frost")
+
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Inferno")
+        
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Lightning")
+        
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Electral Chaos")
+        
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Masterful Wrath")
+        
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Shadow Charge")
+       
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Shadowfire")
+    
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Eternity Storm")
+            
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Blazing Entity")
+    end,
+ })
+ local Toggle = main:CreateToggle({
+    Name = "Dissable PopUp Coin & Chi",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.PopUp = state
+        game:GetService("Players").LocalPlayer.PlayerGui.statEffectsGui.Enabled = not game:GetService("Players").LocalPlayer.PlayerGui.statEffectsGui.Enabled
+        game:GetService("Players").LocalPlayer.PlayerGui.hoopGui.Enabled = not game:GetService("Players").LocalPlayer.PlayerGui.hoopGui.Enabled
+    end,
+ })
+ local Toggle = main:CreateToggle({
+    Name = "Invisibility",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.invis = (state and true or false)
+        wait()
+        while _G.invis == true do
+            wait()
+            local A_1 = "goInvisible"
+    local Event = game.Players.LocalPlayer.ninjaEvent
+    Event:FireServer(A_1)
+    end   
+    end,
+ })
+ local Toggle = misc:CreateToggle({
+    Name = "Inf Jump",
+    CurrentValue = false,
+    Flag = "Toggle", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(state)
+        _G.iJumps = state
+        local InfiniteJumpEnabled = true
+        game:GetService("UserInputService").JumpRequest:connect(function()
+            if InfiniteJumpEnabled then
+                game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+                end
+        end)
+    end,
+ })
+ local Button = misc:CreateButton({
+    Name = "Rejoin",
+    Callback = function()
+        local ts = game:GetService("TeleportService")
+        local p = game:GetService("Players").LocalPlayer
+        ts:Teleport(game.PlaceId, p)    
+    end,
+ })
+local cred = Window:CreateTab("Credits", "cross")
+local dis = cred:CreateLabel("Join My discord For More Info!")
+local Button = cred:CreateButton({
+    Name = "Copy Discord Link",
+    Callback = function()
+        setclipboard("https://discord.com/YERMQTRRmQ")
+    end,
+ })
