@@ -1,0 +1,27 @@
+local scripts = {
+    [3956818381] = "https://raw.githubusercontent.com/iOKAK666/name/refs/heads/main/Ninja%20Legens",--Ninja Legens
+    [7215881810] = "https://raw.githubusercontent.com/iOKAK666/name/refs/heads/main/NO%20LIMIT%20STRONGEST%20PUNCH%20SIMULATOR"--NO LIMIT STRONGEST PUNCH SIMULATOR
+
+}
+
+local scriptURL = scripts[game.PlaceId]
+if scriptURL then
+    local success, response = pcall(function()
+        return game:HttpGet(scriptURL)
+    end)
+    
+    if success and response then
+        local runSuccess, errorMessage = pcall(function()
+            loadstring(response)()
+        end)
+        if runSuccess then
+            print("✅")
+        else
+            warn("⚠️" .. errorMessage)
+        end
+    else
+        warn("❌")
+    end
+else
+    LocalPlayer:Kick("🚫   🚫   🚫 Map Not Support! 🚫   🚫   🚫")
+end
