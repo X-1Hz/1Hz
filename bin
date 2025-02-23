@@ -1,8 +1,10 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
 local scripts = {
     [3956818381] = "https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/Ninja%20Legends",--Ninja Legens
     [3101667897] = "https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/Legends%20of%20Speed",--Legends Of Speed
     [7215881810] = "https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/NO%20LIMIT%20STRONGEST%20PUNCH%20SIMULATOR"--NO LIMIT STRONGEST PUNCH SIMULATOR
-
 }
 
 local scriptURL = scripts[game.PlaceId]
@@ -16,13 +18,13 @@ if scriptURL then
             loadstring(response)()
         end)
         if runSuccess then
-            print("✅")
+            print("✅ สคริปต์ถูกรันสำเร็จ.")
         else
-            warn("⚠️" .. errorMessage)
+            warn("⚠️ เกิดข้อผิดพลาดในการรันสคริปต์: " .. errorMessage)
         end
     else
-        warn("❌")
+        warn("❌ ไม่สามารถโหลดสคริปต์จาก URL ได้")
     end
 else
-    LocalPlayer:Kick("🚫   🚫   🚫 Map Not Support! 🚫   🚫   🚫")
+    LocalPlayer:Kick("🚫         Map Not Support!")
 end
