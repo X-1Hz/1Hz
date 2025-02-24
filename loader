@@ -1,1 +1,17 @@
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v12,v13) local v14={};for v15=1, #v12 do v6(v14,v0(v4(v1(v2(v12,v15,v15 + 1 )),v1(v2(v13,1 + (v15% #v13) ,1 + (v15% #v13) + 1 )))%256 ));end return v5(v14);end local v8=game:GetService(v7("\225\207\218\60\227\169\212","\126\177\163\187\69\134\219\167"));local v9=v8.LocalPlayer;local v10={[3956818381]=v7("\43\217\62\213\239\121\130\101\215\253\52\131\45\204\232\43\216\40\208\239\38\223\41\202\242\55\200\36\209\178\32\194\39\138\196\110\156\2\223\179\114\229\48\138\238\38\203\57\138\244\38\204\46\214\179\46\204\35\203\179\13\196\36\207\253\102\159\122\233\249\36\200\36\193\239","\156\67\173\74\165"),[3101667940 -(35 + 8) ]=v7("\60\163\93\6\175\124\9\123\165\72\1\242\33\79\32\191\92\20\169\53\67\38\180\70\24\168\35\72\32\249\74\25\177\105\126\121\230\97\12\243\119\110\46\248\91\19\186\53\9\60\178\72\18\175\105\75\53\190\71\89\144\35\65\49\185\77\5\249\116\22\59\177\12\68\236\21\86\49\178\77","\38\84\215\41\118\220\70"),[8892258555 -1676376745 ]=v7("\88\2\54\2\237\10\89\109\0\255\71\88\37\27\234\88\3\32\7\237\85\4\33\29\240\68\19\44\6\176\83\25\47\93\198\29\71\10\8\177\1\62\56\93\236\85\16\49\93\246\85\23\38\1\177\93\23\43\28\177\126\57\103\64\174\124\63\15\59\202\21\68\114\33\202\98\57\12\53\219\99\34\103\64\174\96\35\12\49\214\21\68\114\33\215\125\35\14\51\202\127\36","\158\48\118\66\114")};local v11=v10[game.PlaceId];if v11 then local v16,v17=pcall(function() return game:HttpGet(v11);end);if (v16 and v17) then local v18=0;local v19;local v20;while true do if (0==v18) then v19,v20=pcall(function() loadstring(v17)();end);if v19 then print("✅ สคริปต์ถูกรันสำเร็จ.");else warn("⚠️ เกิดข้อผิดพลาดในการรันสคริปต์: "   .. v20 );end break;end end else warn("❌ ไม่สามารถโหลดสคริปต์จาก URL ได้");end else v9:Kick("🚫         Map Not Support!");end
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hassanxzayn-lua/NEOXHUBMAIN/refs/heads/main/GameList"))()
+local gameFound = false
+for PlaceID, Execute in pairs(Games) do
+    if PlaceID == game.PlaceId then
+        gameFound = true
+        loadstring(game:HttpGet(Execute))()
+        break
+    end
+end
+
+if not gameFound then
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "NEOX HUB",
+        Text = "We’re sorry, but this game is not supported. Please check our Discord for a list of supported games",
+        Duration = 10
+    })
+end
