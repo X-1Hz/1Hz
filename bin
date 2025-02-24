@@ -1,7 +1,5 @@
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
-local scripts = {
+local Game_ID = game.GameId
+local Games = {
     [3956818381] = "https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/Ninja%20Legends",--Ninja Legens
     [3101667897] = "https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/Legends%20of%20Speed",--Legends Of Speed
     [134647480721869] = "https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/Infinite%20Pizza%20Clicker",--Infinite Pizza Clicker
@@ -9,25 +7,4 @@ local scripts = {
 Build A Boat For Treasure
     [7215881810] = "https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/NO%20LIMIT%20STRONGEST%20PUNCH%20SIMULATOR"--NO LIMIT STRONGEST PUNCH SIMULATOR
 }
-
-local scriptURL = scripts[game.PlaceId]
-if scriptURL then
-    local success, response = pcall(function()
-        return game:HttpGet(scriptURL)
-    end)
-    
-    if success and response then
-        local runSuccess, errorMessage = pcall(function()
-            loadstring(response)()
-        end)
-        if runSuccess then
-            print("✅ สคริปต์ถูกรันสำเร็จ.")
-        else
-            warn("⚠️ เกิดข้อผิดพลาดในการรันสคริปต์: " .. errorMessage)
-        end
-    else
-        warn("❌ ไม่สามารถโหลดสคริปต์จาก URL ได้")
-    end
-else
-    LocalPlayer:Kick("🚫         Map Not Support!")
-end
+loadstring(game:HttpGet(Games[Game_ID]))()
