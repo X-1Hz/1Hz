@@ -1,9 +1,7 @@
-local Game_ID = game.GameId
-local Games = {
+getgenv().Games = {
     [3956818381] = "https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/Ninja%20Legends",
     [3101667897] = "https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/Legends%20of%20Speed",
     [134647480721869] = "https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/Infinite%20Pizza%20Clicker",
     [537413528] = "https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/Build%20A%20Boat%20For%20Treasure",
     [7215881810] = "https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/NO%20LIMIT%20STRONGEST%20PUNCH%20SIMULATOR",
 }
-loadstring(game:HttpGet(Games[Game_ID]))()
