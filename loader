@@ -10,7 +10,7 @@ end
 
 if not gameFound then
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "NEOX HUB",
+        Title = "By 1Hz",
         Text = "We’re sorry, but this game is not supported. Please check our Discord for a list of supported games",
         Duration = 10
     })
