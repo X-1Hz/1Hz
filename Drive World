@@ -1,62 +1,61 @@
-
+local function L_1_func()
+	local L_4_ = true
+	local L_5_ = game
+	local L_6_ = L_5_.Workspace
+	local L_7_ = L_5_.Lighting
+	local L_8_ = L_6_.Terrain
+	pcall(function()
+		sethiddenproperty(L_7_, "Technology", 2)
+	end)
+	pcall(function()
+		sethiddenproperty(L_8_, "Decoration", false)
+	end)
+	L_8_.WaterWaveSize = 0
+	L_8_.WaterWaveSpeed = 0
+	L_8_.WaterReflectance = 0
+	L_8_.WaterTransparency = 0
+	L_7_.GlobalShadows = false
+	L_7_.FogEnd = 387420489
+	L_7_.Brightness = 0
+	pcall(function()
+		settings().Rendering.QualityLevel = "Level01"
+	end)
+	for L_9_forvar0, L_10_forvar1 in pairs(L_5_:GetDescendants()) do
+		pcall(function()
+			if L_10_forvar1:IsA("Part") or L_10_forvar1:IsA("Union") or L_10_forvar1:IsA("CornerWedgePart") or L_10_forvar1:IsA("TrussPart") then
+				L_10_forvar1.Material = "Plastic"
+				L_10_forvar1.Reflectance = 0
+			elseif L_10_forvar1:IsA("Decal") or L_10_forvar1:IsA("Texture") and L_4_ then
+				L_10_forvar1.Transparency = 1
+			elseif L_10_forvar1:IsA("ParticleEmitter") or L_10_forvar1:IsA("Trail") then
+				L_10_forvar1.Lifetime = NumberRange.new(0)
+			elseif L_10_forvar1:IsA("Explosion") then
+				L_10_forvar1.BlastPressure = 1
+				L_10_forvar1.BlastRadius = 1
+			elseif L_10_forvar1:IsA("Fire") or L_10_forvar1:IsA("SpotLight") or L_10_forvar1:IsA("Smoke") or L_10_forvar1:IsA("Sparkles") then
+				L_10_forvar1.Enabled = false
+			elseif L_10_forvar1:IsA("MeshPart") then
+				L_10_forvar1.Material = "Plastic"
+				L_10_forvar1.Reflectance = 0
+				L_10_forvar1.TextureID = 10385902758728957
+			end
+		end)
+	end
+	for L_11_forvar0, L_12_forvar1 in pairs(L_7_:GetChildren()) do
+		pcall(function()
+			if L_12_forvar1:IsA("BlurEffect") or L_12_forvar1:IsA("SunRaysEffect") or L_12_forvar1:IsA("ColorCorrectionEffect") or L_12_forvar1:IsA("BloomEffect") or L_12_forvar1:IsA("DepthOfFieldEffect") then
+				L_12_forvar1.Enabled = false
+			end
+		end)
+	end
+	print("FPS Booster Applied.")
+end
+local L_2_, L_3_ = pcall(L_1_func)
+if not L_2_ then
+	warn("Error occurred in FPSBooster: " .. L_3_)
+end
 wait(2)  -- รอ 10 วินาทีก่อนเริ่มทำงาน
-local function FPSBooster()
-local decalsyeeted = true
-            local g = game
-            local w = g.Workspace
-            local l = g.Lighting
-            local t = w.Terrain
 
-            pcall(function() sethiddenproperty(l, "Technology", 2) end)
-            pcall(function() sethiddenproperty(t, "Decoration", false) end)
-            
-            t.WaterWaveSize = 0
-            t.WaterWaveSpeed = 0
-            t.WaterReflectance = 0
-            t.WaterTransparency = 0
-            l.GlobalShadows = false
-            l.FogEnd = 9e9
-            l.Brightness = 0
-            pcall(function() settings().Rendering.QualityLevel = "Level01" end)
-
-            for _, v in pairs(g:GetDescendants()) do
-                pcall(function()
-                    if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
-                        v.Material = "Plastic"
-                        v.Reflectance = 0
-                    elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
-                        v.Transparency = 1
-                    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-                        v.Lifetime = NumberRange.new(0)
-                    elseif v:IsA("Explosion") then
-                        v.BlastPressure = 1
-                        v.BlastRadius = 1
-                    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
-                        v.Enabled = false
-                    elseif v:IsA("MeshPart") then
-                        v.Material = "Plastic"
-                        v.Reflectance = 0
-                        v.TextureID = 10385902758728957
-                    end
-                end)
-            end
-
-            for _, e in pairs(l:GetChildren()) do
-                pcall(function()
-                    if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
-                        e.Enabled = false
-                    end
-                end)
-            end
-
-            print("FPS Booster Applied.")
-        end
-
-        local success, errorMsg = pcall(FPSBooster)
-        if not success then
-            warn("Error occurred in FPSBooster: " .. errorMsg)
-        end
-    end
 while true do
    -- เริ่มการทำงานหลัก
    local workTimer = tick()
@@ -78,7 +77,7 @@ while true do
        local speed = tonumber(speedLabel.Text)
        
        if speed and speed < 20 then
-           wait(5)  -- รอ 10 วินาทีหลังจากความเร็วน้อยกว่า 20
+           wait(3)  -- รอ 10 วินาทีหลังจากความเร็วน้อยกว่า 20
            break  -- ออกจาก loop เพื่อเริ่มทำงานใหม่
        end
        
