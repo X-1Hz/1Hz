@@ -54,7 +54,6 @@ local function FPSBooster()
         if not success then
             warn("Error occurred in FPSBooster: " .. errorMsg)
         end
-    end
 
 --antiafk
 task.spawn(function()
