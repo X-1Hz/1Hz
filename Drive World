@@ -1,5 +1,6 @@
 
 wait(2)  -- รอ 10 วินาทีก่อนเริ่มทำงาน
+local function FPSBooster()
 local decalsyeeted = true
             local g = game
             local w = g.Workspace
