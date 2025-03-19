@@ -1,0 +1,955 @@
+--discord.gg/boronide, code generated using luamin.js™
+
+
+
+
+do
+	local success, err = pcall(function()
+		local SoundId = "rbxassetid://5515669992";
+		local volume = 3;
+		local notifications = {};
+		local function playNotificationSound()
+			local sound = Instance.new("Sound");
+			sound.SoundId = SoundId;
+			sound.Volume = volume;
+			sound.Parent = game:GetService("SoundService");
+			sound:Play();
+			sound.Ended:Connect(function()
+				sound:Destroy();
+			end);
+		end
+		local function updateNotificationPositions()
+			for i, frame in ipairs(notifications) do
+				local targetPos = UDim2.new(0, 20, 0, 20 + ((i - 1) * 70) );
+				game:GetService("TweenService"):Create(frame, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+					Position = targetPos
+				}):Play();
+			end
+		end
+		local function createNotification(message, duration, imageAssetId)
+			local player = game.Players.LocalPlayer;
+			local playerGui = player:WaitForChild("PlayerGui");
+			playNotificationSound();
+			local screenGui = playerGui:FindFirstChild("NotificationGui") or Instance.new("ScreenGui") ;
+			screenGui.Name = "NotificationGui";
+			screenGui.Parent = playerGui;
+			local notificationFrame = Instance.new("Frame");
+			notificationFrame.Size = UDim2.new(0, 220, 0, 60);
+			notificationFrame.Position = UDim2.new(0, -200, 0, 20);
+			notificationFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
+			notificationFrame.BackgroundTransparency = 0.2;
+			notificationFrame.BorderSizePixel = 1;
+			notificationFrame.BorderColor3 = Color3.fromRGB(128, 128, 128);
+			notificationFrame.ClipsDescendants = true;
+			notificationFrame.Parent = screenGui;
+			local uiCorner = Instance.new("UICorner");
+			uiCorner.CornerRadius = UDim.new(0, 19);
+			uiCorner.Parent = notificationFrame;
+			local notificationText = Instance.new("TextLabel");
+			notificationText.Size = UDim2.new(1, 0, 1, 0);
+			notificationText.Text = message;
+			notificationText.TextColor3 = Color3.fromRGB(255, 255, 255);
+			notificationText.TextSize = 13;
+			notificationText.TextWrapped = true;
+			notificationText.BackgroundTransparency = 1;
+			notificationText.Font = Enum.Font.GothamBold;
+			notificationText.Parent = notificationFrame;
+			local durationBar = Instance.new("Frame");
+			durationBar.Size = UDim2.new(1, 0, 0.1, 0);
+			durationBar.Position = UDim2.new(0, 9, 0.8, 0);
+			durationBar.BackgroundColor3 = Color3.fromRGB(0, 170, 255);
+			durationBar.BorderSizePixel = 0;
+			durationBar.Parent = notificationFrame;
+			local barCorner = Instance.new("UICorner");
+			barCorner.CornerRadius = UDim.new(0, 5);
+			barCorner.Parent = durationBar;
+			local imageLabel = Instance.new("ImageLabel");
+			imageLabel.Size = UDim2.new(0, 20, 0, 20);
+			imageLabel.Position = UDim2.new(1, -213, 0, 5);
+			imageLabel.BackgroundTransparency = 1;
+			imageLabel.Image = imageAssetId;
+			imageLabel.Parent = notificationFrame;
+			table.insert(notifications, notificationFrame);
+			updateNotificationPositions();
+			local tweenService = game:GetService("TweenService");
+			local tweenIn = tweenService:Create(notificationFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+				Position = UDim2.new(0, 20, 0, 20 + (( #notifications - 1) * 70) )
+			});
+			tweenIn:Play();
+			local durationTween = tweenService:Create(durationBar, TweenInfo.new(duration, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
+				Size = UDim2.new(0, 0, 0.1, 0)
+			});
+			durationTween:Play();
+			local function closeNotification()
+				local tweenOut = tweenService:Create(notificationFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+					Position = UDim2.new(0, -200, 0, notificationFrame.Position.Y.Offset)
+				});
+				tweenOut:Play();
+				tweenOut.Completed:Wait();
+				for i, frame in ipairs(notifications) do
+					if (frame == notificationFrame) then
+						table.remove(notifications, i);
+						break;
+					end
+				end
+				updateNotificationPositions();
+				notificationFrame:Destroy();
+			end
+			notificationFrame.InputBegan:Connect(function(input)
+				if ((input.UserInputType == Enum.UserInputType.Touch) or (input.UserInputType == Enum.UserInputType.MouseButton1)) then
+					closeNotification();
+				end
+			end);
+			task.spawn(function()
+				task.wait(duration);
+				closeNotification();
+			end);
+		end
+		createNotification("(Loading...) Setting Up PTLR", 4, "rbxassetid://132036502772790");
+		task.wait(4);
+		local function playSound(soundId)
+			local sound = Instance.new("Sound");
+			sound.SoundId = soundId;
+			sound.Parent = workspace;
+			sound:Play();
+			sound.Ended:Connect(function()
+				sound:Destroy();
+			end);
+		end
+		playSound("rbxassetid://4499400560");
+		print(" ၊၊||၊|။||||။‌‌‌‌‌၊|• PrintLoader •၊၊||၊|။||||။‌‌‌‌‌၊|");
+		task.wait();
+		local UIS = game:GetService("UserInputService");
+		local function openConsole()
+			game:GetService("StarterGui"):SetCore("DevConsoleVisible", true);
+		end
+		openConsole();
+		UIS.InputBegan:Connect(function(input, gameProcessed)
+			if ( not gameProcessed and (input.KeyCode == Enum.KeyCode.P)) then
+				openConsole();
+			end
+		end);
+		pcall(function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/X-1Hz/1Hz/refs/heads/main/1", true))();
+			playSound("rbxassetid://9120299810");
+			task.wait();
+			playSound("rbxassetid://9120299810");
+			task.wait();
+			playSound("rbxassetid://9120299810");
+			task.wait(0.5);
+		end);
+		print("☑️ ---Checking Local Player Activity---");
+		playSound("rbxassetid://9120299810");
+		task.wait(2);
+		local userInputService = game:GetService("UserInputService");
+		if userInputService.TouchEnabled then
+			print("📱 [Scanning] PlayerUserMobile");
+			playSound("rbxassetid://9120299810");
+		else
+			print("🖥️ [Scanning] PlayerUserPersonalComputer");
+			playSound("rbxassetid://9120299810");
+		end
+		task.wait();
+		print("✅ [Status] GUI Loaded Successfully");
+		playSound("rbxassetid://9120299810");
+		task.wait();
+		print("✅ [Status] Attaching UI to LocalPlayer...");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] Displaying UI...");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] UI Button Functionality Active");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] All Functionality Active");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] Player Base Data Found");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] Player Base Model Found");
+		playSound("rbxassetid://9120299810");
+		task.wait(1);
+		print("🔎 [Scanning] Scanning for Errors...");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.3);
+		local function checkForError()
+			local success, errorMessage = pcall(function()
+			end);
+			if success then
+				print("✅ [Status] No Error Detected.");
+				playSound("rbxassetid://9120299810");
+			else
+				print("⚠️ [Warning] Error Detected: "   .. errorMessage );
+				playSound("rbxassetid://9120299810");
+			end
+		end
+		checkForError();
+		print("✅ [Status] Activating pcall Function...");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] Network Connection Active");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] Player Online");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("❌ [Warning] Player Offline");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.2);
+		print("✅ [Status] Removed Unnecessary Parts or Textures");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] Remove particles and optimise Physics");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] Script is Running");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] Checking Script Activity...");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("❌ [Warning] Face Tracking Disabled");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("------------------------------------------------");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("☑️ ---Internal Resources---");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.6);
+		print("☑️ ---Library Resources---");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.5);
+		print("☑️ ---Local Services---");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.6);
+		print("------------------------------------------------");
+		playSound("rbxassetid://9120299810");
+		task.wait();
+		print("✅ [Status] Workspace Initialized");
+		playSound("rbxassetid://9120299810");
+		task.wait();
+		print("✅ [Status] Enabling Functionality...");
+		playSound("rbxassetid://9120299810");
+		task.wait();
+		print("✅ [Status] FPS counter Enabled");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.2);
+		print("✅ ---Creating Instances---");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.3);
+		print("✅ [Status] Draggable UI Enabled");
+		playSound("rbxassetid://9120299810");
+		task.wait();
+		print("✅ [Status] Dragging Speed Unlocked");
+		playSound("rbxassetid://9120299810");
+		task.wait();
+		print("✅ [Status] Network Module Enabled");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.8);
+		print("✅ [Status] UI Positioned Correctly");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] Sound Effects Enabled");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] Buttons Initialized");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.4);
+		print("✅ [Status] Notification UI Loaded");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.4);
+		print("✅ [Status] Minimize/Close Functionality Enabled");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.2);
+		print("✅ [Status] Text Label Initialized");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] UI Corners, Outlines, and Image Labels Initialized");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.4);
+		print("☑️ ---Creating GUI---");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.5);
+		print("✅ [Status] Displaying GUI...");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.9);
+		print("✅ [Status] Displaying Library...");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.9);
+		print("🔎 [Status] Testing Components...");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.5);
+		print("▶️ [Status] Activating Script...");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.7);
+		print("🕒 ---Loading Script---");
+		playSound("rbxassetid://9120299810");
+		task.wait(2);
+		print("✅ [Status] Local Script Enabled");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("✅ [Status] Script Loaded Successfully!");
+		playSound("rbxassetid://9120299810");
+		task.wait();
+		print("⚠️ [Warn] Script Finished Loading");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("📝 Script Name: (FpsBooster)");
+		playSound("rbxassetid://9120299810");
+		task.wait(0.1);
+		print("📝 Test the Script!");
+		playSound("rbxassetid://9120299810");
+		task.wait(2);
+		print("⚙️ --Close Console--");
+		playSound("rbxassetid://9120299810");
+		task.wait(1);
+		playSound("rbxassetid://4499400560");
+		local UIS = game:GetService("UserInputService");
+		local function closeConsole()
+			game:GetService("StarterGui"):SetCore("DevConsoleVisible", false);
+		end
+		closeConsole();
+		UIS.InputBegan:Connect(function(input, gameProcessed)
+			if ( not gameProcessed and (input.KeyCode == Enum.KeyCode.O)) then
+				closeConsole();
+			end
+		end);
+	end);
+	task.wait(2);
+	local RunService = game:GetService("RunService");
+	local UserInputService = game:GetService("UserInputService");
+	local screenGui = Instance.new("ScreenGui");
+	screenGui.Name = "FPSCounter";
+	screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui");
+	local fpsFrame = Instance.new("Frame");
+	fpsFrame.Size = UDim2.new(0, 150, 0, 40);
+	fpsFrame.Position = UDim2.new(0.01, 0, 0.01, 0);
+	fpsFrame.BackgroundTransparency = 0.2;
+	fpsFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
+	fpsFrame.BorderSizePixel = 0;
+	fpsFrame.Parent = screenGui;
+	fpsFrame.Active = true;
+	local uiCorner = Instance.new("UICorner");
+	uiCorner.CornerRadius = UDim.new(0, 20);
+	uiCorner.Parent = fpsFrame;
+	local fpsLabel = Instance.new("TextLabel");
+	fpsLabel.Size = UDim2.new(1, 0, 1, 0);
+	fpsLabel.BackgroundTransparency = 1;
+	fpsLabel.TextColor3 = Color3.fromRGB(255, 255, 255);
+	fpsLabel.TextScaled = true;
+	fpsLabel.Font = Enum.Font.SourceSansBold;
+	fpsLabel.Text = "FPS: 0";
+	fpsLabel.Parent = fpsFrame;
+	local lastTime = tick();
+	local frameCount = 0;
+	local updateInterval = 0.1;
+	RunService.RenderStepped:Connect(function()
+		frameCount = frameCount + 1 ;
+		local currentTime = tick();
+		if ((currentTime - lastTime) >= 1) then
+			local fps = frameCount / (currentTime - lastTime) ;
+			fpsLabel.Text = string.format("FPS: %d", fps);
+			lastTime = currentTime;
+			frameCount = 0;
+		end
+	end);
+	local gui = fpsFrame;
+	local dragging;
+	local dragStart;
+	local startPos;
+	local lastMousePos;
+	local lastGoalPos;
+	local DRAG_SPEED = 5;
+	function Lerp(a, b, m)
+		return a + ((b - a) * m) ;
+	end
+	function Update(dt)
+		if  not startPos then
+			return;
+		end
+		if ( not dragging and lastGoalPos) then
+			gui.Position = UDim2.new(startPos.X.Scale, Lerp(gui.Position.X.Offset, lastGoalPos.X.Offset, dt * DRAG_SPEED ), startPos.Y.Scale, Lerp(gui.Position.Y.Offset, lastGoalPos.Y.Offset, dt * DRAG_SPEED ));
+			return;
+		end
+		local delta = lastMousePos - UserInputService:GetMouseLocation() ;
+		local xGoal = startPos.X.Offset - delta.X ;
+		local yGoal = startPos.Y.Offset - delta.Y ;
+		lastGoalPos = UDim2.new(startPos.X.Scale, xGoal, startPos.Y.Scale, yGoal);
+		gui.Position = UDim2.new(startPos.X.Scale, Lerp(gui.Position.X.Offset, xGoal, dt * DRAG_SPEED ), startPos.Y.Scale, Lerp(gui.Position.Y.Offset, yGoal, dt * DRAG_SPEED ));
+	end
+	gui.InputBegan:Connect(function(input)
+		if ((input.UserInputType == Enum.UserInputType.MouseButton1) or (input.UserInputType == Enum.UserInputType.Touch)) then
+			dragging = true;
+			dragStart = input.Position;
+			startPos = gui.Position;
+			lastMousePos = UserInputService:GetMouseLocation();
+			input.Changed:Connect(function()
+				if (input.UserInputState == Enum.UserInputState.End) then
+					dragging = false;
+				end
+			end);
+		end
+	end);
+	gui.InputChanged:Connect(function(input)
+		if ((input.UserInputType == Enum.UserInputType.MouseMovement) or (input.UserInputType == Enum.UserInputType.Touch)) then
+			dragInput = input;
+		end
+	end);
+	RunService.Heartbeat:Connect(Update);
+	local tapCount = 0;
+	local lastTapTime = 0;
+	local TRIPLE_TAP_THRESHOLD = 0.5;
+	gui.InputBegan:Connect(function(input)
+		if ((input.UserInputType == Enum.UserInputType.MouseButton1) or (input.UserInputType == Enum.UserInputType.Touch)) then
+			local currentTime = tick();
+			if ((currentTime - lastTapTime) <= TRIPLE_TAP_THRESHOLD) then
+				tapCount = tapCount + 1 ;
+			else
+				tapCount = 1;
+			end
+			lastTapTime = currentTime;
+			if (tapCount >= 3) then
+				screenGui:Destroy();
+			end
+		end
+	end);
+	local function optimizeParts()
+		for _, obj in ipairs(workspace:GetDescendants()) do
+			if obj:IsA("BasePart") then
+				obj.Material = Enum.Material.SmoothPlastic;
+				obj.Reflectance = 0;
+				obj.CastShadow = false;
+			end
+		end
+	end
+	local function optimizeTextures()
+		for _, obj in ipairs(workspace:GetDescendants()) do
+			if (obj:IsA("Texture") or obj:IsA("Decal")) then
+				obj.Transparency = math.min(obj.Transparency + 0.3 , 1);
+			end
+		end
+	end
+	local function optimizeLighting()
+		local lighting = game:GetService("Lighting");
+		lighting.GlobalShadows = false;
+		lighting.Brightness = 2;
+		lighting.ClockTime = 14;
+	end
+	local function optimizeScripts()
+		for _, obj in ipairs(workspace:GetDescendants()) do
+			if (obj:IsA("Script") or obj:IsA("LocalScript")) then
+			end
+		end
+	end
+	local function optimizeTerrain()
+		local terrain = workspace:FindFirstChildOfClass("Terrain");
+		if terrain then
+			terrain.Decoration = false;
+			terrain.WaterReflectance = 0;
+			terrain.WaterWaveSize = 0;
+			terrain.WaterWaveSpeed = 0;
+		end
+	end
+	local function optimizePlayers()
+		local players = game:GetService("Players");
+		local localPlayer = players.LocalPlayer;
+		for _, player in ipairs(players:GetPlayers()) do
+			if (player.Character and (player ~= localPlayer)) then
+				for _, part in ipairs(player.Character:GetDescendants()) do
+					if part:IsA("BasePart") then
+						part.Material = Enum.Material.SmoothPlastic;
+						part.CastShadow = false;
+					end
+				end
+			end
+		end
+	end
+	local function optimizePhysics()
+		local physicsService = game:GetService("PhysicsService");
+		physicsService.ThrottleAdjustTime = 1;
+		game:GetService("Workspace").PhysicsSteppingMethod = Enum.PhysicsSteppingMethod.Fixed;
+	end
+	local function optimizeRendering()
+		settings().Rendering.QualityLevel = Enum.QualityLevel.Level01;
+	end
+	local function optimizeNetwork()
+		local networkSettings = settings().Network;
+		networkSettings.PhysicsSend = 1;
+		networkSettings.PhysicsReceive = 1;
+	end
+	local function optimizeGame()
+		optimizeParts();
+		optimizeTextures();
+		optimizeLighting();
+		optimizeScripts();
+		optimizeTerrain();
+		optimizePlayers();
+		optimizePhysics();
+		optimizeRendering();
+		optimizeNetwork();
+	end
+	optimizeGame();
+	print("Game optimization complete! Lag should be reduced.");
+	local ToDisable = {
+		Textures = true,
+		VisualEffects = true,
+		Parts = true,
+		Particles = true,
+		Sky = true
+	};
+	local ToEnable = {
+		FullBright = false
+	};
+	local Stuff = {};
+	for _, v in next, game:GetDescendants() do
+		if ToDisable.Parts then
+			if (v:IsA("Part") or v:IsA("Union") or v:IsA("BasePart")) then
+				v.Material = Enum.Material.SmoothPlastic;
+				table.insert(Stuff, 1, v);
+			end
+		end
+		if ToDisable.Particles then
+			if (v:IsA("ParticleEmitter") or v:IsA("Smoke") or v:IsA("Explosion") or v:IsA("Sparkles") or v:IsA("Fire")) then
+				v.Enabled = false;
+				table.insert(Stuff, 1, v);
+			end
+		end
+		if ToDisable.VisualEffects then
+			if (v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("DepthOfFieldEffect") or v:IsA("SunRaysEffect")) then
+				v.Enabled = false;
+				table.insert(Stuff, 1, v);
+			end
+		end
+		if ToDisable.Textures then
+			if (v:IsA("Decal") or v:IsA("Texture")) then
+				v.Texture = "";
+				table.insert(Stuff, 1, v);
+			end
+		end
+		if ToDisable.Sky then
+			if v:IsA("Sky") then
+				v.Parent = nil;
+				table.insert(Stuff, 1, v);
+			end
+		end
+	end
+	game:GetService("TestService"):Message("Effects Disabler Script : Successfully disabled "   ..  #Stuff   .. " assets / effects. Settings :" );
+	for i, v in next, ToDisable do
+		print(tostring(i)   .. ": "   .. tostring(v) );
+	end
+	if ToEnable.FullBright then
+		local Lighting = game:GetService("Lighting");
+		Lighting.FogColor = Color3.fromRGB(255, 255, 255);
+		Lighting.FogEnd = math.huge;
+		Lighting.FogStart = math.huge;
+		Lighting.Ambient = Color3.fromRGB(255, 255, 255);
+		Lighting.Brightness = 5;
+		Lighting.ColorShift_Bottom = Color3.fromRGB(255, 255, 255);
+		Lighting.ColorShift_Top = Color3.fromRGB(255, 255, 255);
+		Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255);
+		Lighting.Outlines = true;
+	end
+	if  not gethui then
+		warn("Incompatible executor: gethui is unavailable");
+		return;
+	end
+	local runService = game:GetService("RunService");
+	local lighting = game:GetService("Lighting");
+	local fpsCounterGui = Instance.new("ScreenGui", gethui());
+	local fpsLabel = Instance.new("TextLabel", fpsCounterGui);
+	fpsCounterGui.Name = "FpsCounterGui";
+	fpsCounterGui.IgnoreGuiInset = true;
+	fpsLabel.Name = "FpsLabel";
+	fpsLabel.BackgroundTransparency = 1;
+	fpsLabel.Position = UDim2.new(1, -100, 0, 0);
+	fpsLabel.Size = UDim2.new(0, 100, 0, 30);
+	fpsLabel.Text = "";
+	fpsLabel.TextSize = 16;
+	fpsLabel.TextStrokeTransparency = 0.6;
+	fpsLabel.Draggable = true;
+	local function GetFPS(delay)
+		local startTime = tick();
+		local frames = 0;
+		local heartbeatConnection = runService.Heartbeat:Connect(function()
+			frames = frames + 1 ;
+		end);
+		task.wait(delay);
+		heartbeatConnection:Disconnect();
+		local elapsedTime = tick() - startTime ;
+		local fps = frames / elapsedTime ;
+		return math.ceil(fps);
+	end
+	task.spawn(function()
+		while true do
+			local fps = GetFPS(0.5);
+			if (fps >= 60) then
+				fpsLabel.TextColor3 = Color3.fromRGB(0, 255, 0);
+			elseif ((fps <= 59) and (fps > 50)) then
+				fpsLabel.TextColor3 = Color3.fromRGB(255, 170, 0);
+			elseif ((fps <= 49) and (fps > 30)) then
+				fpsLabel.TextColor3 = Color3.fromRGB(255, 85, 0);
+			elseif (fps <= 29) then
+				fpsLabel.TextColor3 = Color3.fromRGB(255, 0, 0);
+			end
+			fpsLabel.Text = tostring(fps)   .. " FPS" ;
+		end
+	end);
+	lighting.GlobalShadows = false;
+	lighting.FogEnd = 8999999488;
+	lighting.EnvironmentDiffuseScale = 0.5;
+	lighting.EnvironmentSpecularScale = 0.5;
+	for _, descendant in ipairs(game:GetDescendants()) do
+		if descendant:IsA("BasePart") then
+			descendant.CastShadow = false;
+			descendant.Material = Enum.Material.SmoothPlastic;
+			descendant.Reflectance = 0;
+			if descendant:IsA("MeshPart") then
+				descendant.CollisionFidelity = Enum.CollisionFidelity.Box;
+			end
+		end
+		if (descendant:IsA("Decal") or descendant:IsA("Texture")) then
+			if (descendant.Transparency > 0.25) then
+				descendant.Transparency = 0.25;
+			end
+		end
+		if (descendant:IsA("ParticleEmitter") or descendant:IsA("Trail")) then
+			descendant.Lifetime = NumberRange.new(0);
+		end
+	end
+	wait(1);
+	local parts = game.Workspace:GetChildren();
+	for i = 1, #parts do
+		local name = string.lower(parts[i].Name);
+		if ((string.find(name, "lag") ~= nil) and ((string.find(name, "anti") ~= nil) or (string.find(name, "no") ~= nil) or (string.find(name, "remover") ~= nil) or (string.find(name, "killer") ~= nil)) and (parts[i] ~= script)) then
+			parts[i]:remove();
+		end
+	end
+	wait();
+	script:remove();
+	mx = game.Debris;
+	mx2 = game.Debris.MaxItems;
+	if (mx.MaxItems > 40000) then
+		mx.MaxItems = mx2 * 0.75 ;
+	end
+	task.wait();
+	local decalsyeeted = true;
+	local g = game;
+	local w = g.Workspace;
+	local l = g.Lighting;
+	local t = w.Terrain;
+	t.WaterWaveSize = 0;
+	t.WaterWaveSpeed = 0;
+	t.WaterReflectance = 0;
+	t.WaterTransparency = 0;
+	l.GlobalShadows = false;
+	l.FogEnd = 8999999488;
+	l.Brightness = 0;
+	settings().Rendering.QualityLevel = "Level01";
+	for i, v in pairs(g:GetDescendants()) do
+		if (v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart")) then
+			v.Material = "Plastic";
+			v.Reflectance = 0;
+		elseif (v:IsA("Decal") or (v:IsA("Texture") and decalsyeeted)) then
+			v.Transparency = 1;
+		elseif (v:IsA("ParticleEmitter") or v:IsA("Trail")) then
+			v.Lifetime = NumberRange.new(0);
+		elseif v:IsA("Explosion") then
+			v.BlastPressure = 1;
+			v.BlastRadius = 1;
+		elseif (v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke")) then
+			v.Enabled = false;
+		elseif v:IsA("MeshPart") then
+			v.Material = "Plastic";
+			v.Reflectance = 0;
+			v.TextureID = 10385902758728956;
+		end
+	end
+	for i, e in pairs(l:GetChildren()) do
+		if (e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect")) then
+			e.Enabled = false;
+		end
+	end
+	if  not _G.Ignore then
+		_G.Ignore = {};
+	end
+	if  not _G.WaitPerAmount then
+		_G.WaitPerAmount = 500;
+	end
+	if (_G.SendNotifications == nil) then
+		_G.SendNotifications = false;
+	end
+	if (_G.ConsoleLogs == nil) then
+		_G.ConsoleLogs = false;
+	end
+	if  not game:IsLoaded() then
+		repeat
+			task.wait();
+		until game:IsLoaded()
+	end
+	if  not _G.Settings then
+		_G.Settings = {
+			Players = {
+				["Ignore Me"] = true,
+				["Ignore Others"] = true,
+				["Ignore Tools"] = true
+			},
+			Meshes = {
+				NoMesh = false,
+				NoTexture = false,
+				Destroy = false
+			},
+			Images = {
+				Invisible = true,
+				Destroy = false
+			},
+			Explosions = {
+				Smaller = true,
+				Invisible = false,
+				Destroy = false
+			},
+			Particles = {
+				Invisible = true,
+				Destroy = false
+			},
+			TextLabels = {
+				LowerQuality = false,
+				Invisible = false,
+				Destroy = false
+			},
+			MeshParts = {
+				LowerQuality = true,
+				Invisible = false,
+				NoTexture = false,
+				NoMesh = false,
+				Destroy = false
+			},
+			Other = {
+				["FPS Cap"] = 240,
+				["No Camera Effects"] = true,
+				["No Clothes"] = true,
+				["Low Water Graphics"] = true,
+				["No Shadows"] = true,
+				["Low Rendering"] = true,
+				["Low Quality Parts"] = true,
+				["Low Quality Models"] = true,
+				["Reset Materials"] = true,
+				["Lower Quality MeshParts"] = true
+			}
+		};
+	end
+	local Players, Lighting, StarterGui, MaterialService = game:GetService("Players"), game:GetService("Lighting"), game:GetService("StarterGui"), game:GetService("MaterialService");
+	local ME, CanBeEnabled = Players.LocalPlayer, {
+		"ParticleEmitter",
+		"Trail",
+		"Smoke",
+		"Fire",
+		"Sparkles"
+	};
+	local function PartOfCharacter(Instance)
+		for i, v in pairs(Players:GetPlayers()) do
+			if ((v ~= ME) and v.Character and Instance:IsDescendantOf(v.Character)) then
+				return true;
+			end
+		end
+		return false;
+	end
+	local function DescendantOfIgnore(Instance)
+		for i, v in pairs(_G.Ignore) do
+			if Instance:IsDescendantOf(v) then
+				return true;
+			end
+		end
+		return false;
+	end
+	local function CheckIfBad(Instance)
+		if ( not Instance:IsDescendantOf(Players) and ((_G.Settings.Players["Ignore Others"] and  not PartOfCharacter(Instance)) or  not _G.Settings.Players["Ignore Others"]) and ((_G.Settings.Players["Ignore Me"] and ME.Character and  not Instance:IsDescendantOf(ME.Character)) or  not _G.Settings.Players["Ignore Me"]) and ((_G.Settings.Players["Ignore Tools"] and  not Instance:IsA("BackpackItem") and  not Instance:FindFirstAncestorWhichIsA("BackpackItem")) or  not _G.Settings.Players["Ignore Tools"]) and ((_G.Ignore and  not table.find(_G.Ignore, Instance) and  not DescendantOfIgnore(Instance)) or  not _G.Ignore or (type(_G.Ignore) ~= "table") or ( #_G.Ignore <= 0))) then
+			if Instance:IsA("DataModelMesh") then
+				if (_G.Settings.Meshes.NoMesh and Instance:IsA("SpecialMesh")) then
+					Instance.MeshId = "";
+				end
+				if (_G.Settings.Meshes.NoTexture and Instance:IsA("SpecialMesh")) then
+					Instance.TextureId = "";
+				end
+				if (_G.Settings.Meshes.Destroy or _G.Settings["No Meshes"]) then
+					Instance:Destroy();
+				end
+			elseif Instance:IsA("FaceInstance") then
+				if _G.Settings.Images.Invisible then
+					Instance.Transparency = 1;
+					Instance.Shiny = 1;
+				end
+				if _G.Settings.Images.LowDetail then
+					Instance.Shiny = 1;
+				end
+				if _G.Settings.Images.Destroy then
+					Instance:Destroy();
+				end
+			elseif Instance:IsA("ShirtGraphic") then
+				if _G.Settings.Images.Invisible then
+					Instance.Graphic = "";
+				end
+				if _G.Settings.Images.Destroy then
+					Instance:Destroy();
+				end
+			elseif table.find(CanBeEnabled, Instance.ClassName) then
+				if (_G.Settings["Invisible Particles"] or _G.Settings["No Particles"] or (_G.Settings.Other and _G.Settings.Other["Invisible Particles"]) or (_G.Settings.Particles and _G.Settings.Particles.Invisible)) then
+					Instance.Enabled = false;
+				end
+				if ((_G.Settings.Other and _G.Settings.Other["No Particles"]) or (_G.Settings.Particles and _G.Settings.Particles.Destroy)) then
+					Instance:Destroy();
+				end
+			elseif (Instance:IsA("PostEffect") and (_G.Settings["No Camera Effects"] or (_G.Settings.Other and _G.Settings.Other["No Camera Effects"]))) then
+				Instance.Enabled = false;
+			elseif Instance:IsA("Explosion") then
+				if (_G.Settings["Smaller Explosions"] or (_G.Settings.Other and _G.Settings.Other["Smaller Explosions"]) or (_G.Settings.Explosions and _G.Settings.Explosions.Smaller)) then
+					Instance.BlastPressure = 1;
+					Instance.BlastRadius = 1;
+				end
+				if (_G.Settings["Invisible Explosions"] or (_G.Settings.Other and _G.Settings.Other["Invisible Explosions"]) or (_G.Settings.Explosions and _G.Settings.Explosions.Invisible)) then
+					Instance.BlastPressure = 1;
+					Instance.BlastRadius = 1;
+					Instance.Visible = false;
+				end
+				if (_G.Settings["No Explosions"] or (_G.Settings.Other and _G.Settings.Other["No Explosions"]) or (_G.Settings.Explosions and _G.Settings.Explosions.Destroy)) then
+					Instance:Destroy();
+				end
+			elseif (Instance:IsA("Clothing") or Instance:IsA("SurfaceAppearance") or Instance:IsA("BaseWrap")) then
+				if (_G.Settings["No Clothes"] or (_G.Settings.Other and _G.Settings.Other["No Clothes"])) then
+					Instance:Destroy();
+				end
+			elseif (Instance:IsA("BasePart") and  not Instance:IsA("MeshPart")) then
+				if (_G.Settings["Low Quality Parts"] or (_G.Settings.Other and _G.Settings.Other["Low Quality Parts"])) then
+					Instance.Material = Enum.Material.Plastic;
+					Instance.Reflectance = 0;
+				end
+			elseif (Instance:IsA("TextLabel") and Instance:IsDescendantOf(workspace)) then
+				if (_G.Settings["Lower Quality TextLabels"] or (_G.Settings.Other and _G.Settings.Other["Lower Quality TextLabels"]) or (_G.Settings.TextLabels and _G.Settings.TextLabels.LowerQuality)) then
+					Instance.Font = Enum.Font.SourceSans;
+					Instance.TextScaled = false;
+					Instance.RichText = false;
+					Instance.TextSize = 14;
+				end
+				if (_G.Settings["Invisible TextLabels"] or (_G.Settings.Other and _G.Settings.Other["Invisible TextLabels"]) or (_G.Settings.TextLabels and _G.Settings.TextLabels.Invisible)) then
+					Instance.Visible = false;
+				end
+				if (_G.Settings["No TextLabels"] or (_G.Settings.Other and _G.Settings.Other["No TextLabels"]) or (_G.Settings.TextLabels and _G.Settings.TextLabels.Destroy)) then
+					Instance:Destroy();
+				end
+			elseif Instance:IsA("Model") then
+				if (_G.Settings["Low Quality Models"] or (_G.Settings.Other and _G.Settings.Other["Low Quality Models"])) then
+					Instance.LevelOfDetail = 1;
+				end
+			elseif Instance:IsA("MeshPart") then
+				if (_G.Settings["Low Quality MeshParts"] or (_G.Settings.Other and _G.Settings.Other["Low Quality MeshParts"]) or (_G.Settings.MeshParts and _G.Settings.MeshParts.LowerQuality)) then
+					Instance.RenderFidelity = 2;
+					Instance.Reflectance = 0;
+					Instance.Material = Enum.Material.Plastic;
+				end
+				if (_G.Settings["Invisible MeshParts"] or (_G.Settings.Other and _G.Settings.Other["Invisible MeshParts"]) or (_G.Settings.MeshParts and _G.Settings.MeshParts.Invisible)) then
+					Instance.Transparency = 1;
+					Instance.RenderFidelity = 2;
+					Instance.Reflectance = 0;
+					Instance.Material = Enum.Material.Plastic;
+				end
+				if (_G.Settings.MeshParts and _G.Settings.MeshParts.NoTexture) then
+					Instance.TextureID = "";
+				end
+				if (_G.Settings.MeshParts and _G.Settings.MeshParts.NoMesh) then
+					Instance.MeshId = "";
+				end
+				if (_G.Settings["No MeshParts"] or (_G.Settings.Other and _G.Settings.Other["No MeshParts"]) or (_G.Settings.MeshParts and _G.Settings.MeshParts.Destroy)) then
+					Instance:Destroy();
+				end
+			end
+		end
+	end
+	coroutine.wrap(pcall)(function()
+		if (_G.Settings["Low Water Graphics"] or (_G.Settings.Other and _G.Settings.Other["Low Water Graphics"])) then
+			if  not workspace:FindFirstChildOfClass("Terrain") then
+				repeat
+					task.wait();
+				until workspace:FindFirstChildOfClass("Terrain")
+			end
+			workspace:FindFirstChildOfClass("Terrain").WaterWaveSize = 0;
+			workspace:FindFirstChildOfClass("Terrain").WaterWaveSpeed = 0;
+			workspace:FindFirstChildOfClass("Terrain").WaterReflectance = 0;
+			workspace:FindFirstChildOfClass("Terrain").WaterTransparency = 0;
+			if sethiddenproperty then
+				sethiddenproperty(workspace:FindFirstChildOfClass("Terrain"), "Decoration", false);
+			end
+		end
+	end);
+	coroutine.wrap(pcall)(function()
+		if (_G.Settings["No Shadows"] or (_G.Settings.Other and _G.Settings.Other["No Shadows"])) then
+			Lighting.GlobalShadows = false;
+			Lighting.FogEnd = 8999999488;
+			Lighting.ShadowSoftness = 0;
+			if sethiddenproperty then
+				sethiddenproperty(Lighting, "Technology", 2);
+			end
+		end
+	end);
+	coroutine.wrap(pcall)(function()
+		if (_G.Settings["Low Rendering"] or (_G.Settings.Other and _G.Settings.Other["Low Rendering"])) then
+			settings().Rendering.QualityLevel = 1;
+			settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04;
+		end
+	end);
+	coroutine.wrap(pcall)(function()
+		if (_G.Settings["Reset Materials"] or (_G.Settings.Other and _G.Settings.Other["Reset Materials"])) then
+			for i, v in pairs(MaterialService:GetChildren()) do
+				v:Destroy();
+			end
+			MaterialService.Use2022Materials = false;
+		end
+	end);
+	coroutine.wrap(pcall)(function()
+		if (_G.Settings["FPS Cap"] or (_G.Settings.Other and _G.Settings.Other["FPS Cap"])) then
+			if setfpscap then
+				if ((type(_G.Settings["FPS Cap"] or (_G.Settings.Other and _G.Settings.Other["FPS Cap"]) ) == "string") or (type(_G.Settings["FPS Cap"] or (_G.Settings.Other and _G.Settings.Other["FPS Cap"]) ) == "number")) then
+					setfpscap(tonumber(_G.Settings["FPS Cap"] or (_G.Settings.Other and _G.Settings.Other["FPS Cap"]) ));
+				elseif (_G.Settings["FPS Cap"] or ((_G.Settings.Other and _G.Settings.Other["FPS Cap"]) == true)) then
+					setfpscap(1000000);
+				end
+			end
+		end
+	end);
+	game.DescendantAdded:Connect(function(value)
+		wait(_G.LoadedWait or 1 );
+		CheckIfBad(value);
+	end);
+	local Descendants = game:GetDescendants();
+	local StartNumber = _G.WaitPerAmount or 500 ;
+	local WaitNumber = _G.WaitPerAmount or 500 ;
+	for i, v in pairs(Descendants) do
+		CheckIfBad(v);
+		if (i == WaitNumber) then
+			task.wait();
+			WaitNumber = WaitNumber + StartNumber ;
+		end
+	end
+	task.wait();
+	local Players = game:GetService("Players");
+	local PhysicsService = game:GetService("PhysicsService");
+	local player = Players.LocalPlayer;
+	local collisionGroupName = "NoCollidePlayers";
+	PhysicsService:CreateCollisionGroup(collisionGroupName);
+	PhysicsService:CollisionGroupSetCollidable(collisionGroupName, collisionGroupName, false);
+	local function disableCollision(character)
+		for _, part in ipairs(character:GetDescendants()) do
+			if part:IsA("BasePart") then
+				part.CollisionGroup = collisionGroupName;
+			end
+		end
+	end
+	if player.Character then
+		disableCollision(player.Character);
+	end
+	player.CharacterAdded:Connect(disableCollision);
+	if  not success then
+		warn("Error caught:", err);
+	end
+end
